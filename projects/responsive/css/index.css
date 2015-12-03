@@ -1,0 +1,33 @@
+nav {
+  background: dodgerBlue;
+}
+
+nav ul {
+  margin: 0;
+}
+
+nav li {
+  padding-right: 20px;
+  padding-top: 20px;
+  height: 40px;
+  display: inline-block;
+}
+
+@media screen and (max-width: 800px) {
+  nav li {
+    display: block;
+    text-align: center;
+  }
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+}
+
+#mainContainer {
+  max-width: 600px;
+  margin: 0 auto 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
