@@ -1,0 +1,53 @@
+.mainContainer {
+  position: relative;
+  background-color: darkgrey;
+  background: url("../img/background.svg");
+  width: 1024px;
+  height: 768px;
+  margin: 50px auto 0 auto;
+}
+
+.centerHexagon {
+  position: absolute;
+  background: url("../img/centerhexagon.svg");
+  top: 334px;
+  left: 462px;
+  width: 100px;
+  height: 100px;
+  background-size: 100px 100px;
+  z-index: 9999;
+}
+
+.triangle1 {
+  position: absolute;
+  top: 314px;
+  left: 502px;
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid dodgerblue;
+  transform-origin:10px 70px;
+}
+
+.blockContainer {
+  position: relative;
+}
+
+.block {
+  position: absolute;
+  width: 455px;
+  height: 30px;
+  background-color: tomato;
+  background: url("../img/block.svg");
+}
+
+
+@keyframes anim {
+  0%   { top: 0; left: 0}
+  100% { top: 500px; left: 500px}
+}
+
+.animate {
+  animation: anim 5s;
+}
