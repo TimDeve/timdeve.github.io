@@ -70,19 +70,22 @@ $(document).ready(function() {
 	};
 
 
+
+
+	// Builder function to create game object
 	var gameMaker = function() {
 		var self = this;
-		var wallArray = [0,0,0,0,0,0];
-		this.blockCounter = 1;
+		this.blockCounter = 0;
+		this.nowPlayingInterval = null;
 
 
-		this.makeBlock = function() {
-			// self.blockCounter++;
-			$('.blockContainer').append('<div style="left:285px" class="block" id="block'+self.blockCounter+'"></div>');
+		this.makeBlock = function(position, blockId) {
+			$('.blockContainer').append('<img src="img/blockOrigin.svg" class="block blockPosition'+position+'"" id="block'+blockId+'">');
 		};
 
+
 		this.createWall = function(){
-			wallArray = [0,0,0,0,0,0];
+			var wallArray = [0,0,0,0,0,0];
 			var wallFullCounter = 0;
 
 				for (i=0; i<wallArray.length; i++) {
@@ -106,49 +109,74 @@ $(document).ready(function() {
 						wallArray[wallPick] = 0;
 					}
 				}
+				return wallArray;
+		};
+
+
+		this.animateBlock = function(blockIndex, blockNumber) {
+			var thisId = "#block"+blockNumber;
+			console.log(thisId);
+			
+			
+			$(thisId).velocity({
+				"top": "384px",
+				"left": "512px",
+				"height": "30px",
+				"width": "0"
+			},
+				3000, function() {
+				$(thisId).remove();
+			});
 
 		};
 
-		// this.animateBlock = function(blockIndex) {
-		// 	var startPoint;
-		// 	var endPoint = 0;
-		// 	var thisId = "#block"+blockIndex;
-		// 	switch(blockIndex) {
-		// 		case 1:
-		// 			$("#block"+blockIndex)
-		// 			break;
-		// 		case 1:
-		// 			statements_1
-		// 			break;
-		// 		case 2:
-		// 			statements_1
-		// 			break;
-		// 		case 3:
-		// 			statements_1
-		// 			break;
-		// 		case 4:
-		// 			statements_1
-		// 			break;
-		// 		case 5:
-		// 			statements_1
-		// 			break;
-		// 		default:
-		// 			statements_def
-		// 			break;
-		// 	}
 
-		// };
+		this.checkCollision = function(blockIndex) {
+			var startPoint= blockIndex * 60 - 30;
+			var endPoint = startPoint + 60;
+			console.log(startPoint + " " + endPoint);
+			setTimeout(function() {
+				var playerPosition = player1.degree;
+				if ((player1.degree > startPoint) && (player1.degree < endPoint)) {
+					alert('You lose');
+					clearInterval(self.nowPlayingInterval);
+				}
+
+			}, 2350);
+		};
+
 
 		this.spawnWall = function() {
-			self.createWall();
+			var wallArray = self.createWall();
 
+			for (i = 0; i < wallArray.length; i++) {
+
+				if (wallArray[i] === 1) {
+					self.blockCounter++;
+					var thisBlock = self.blockCounter;
+
+					self.makeBlock(i, thisBlock);
+
+					self.animateBlock(i, thisBlock);
+
+					self.checkCollision(i);
+				}
+			}
 		};
+
+
+		this.start = function() {
+			self.nowPlayingInterval = setInterval(function(){
+				self.spawnWall();
+			}, 1000);
+		};
+
 
 
 	};
 
-
-
+	
+	
 
 
 
@@ -160,38 +188,32 @@ $(document).ready(function() {
 
 
 	// testing
+	keyListener.register_combo({
+		"keys"              : "e",
+		"prevent_repeat"    : true,
+		"on_keydown"        : function(){game.start();}
+	});
+
+	keyListener.register_combo({
+		"keys"              : "r",
+		"prevent_repeat"    : true,
+		"on_keydown"        : function(){game.animateBlock(0, 33);}
+	});
 
 	keyListener.register_combo({
 		"keys"              : "t",
 		"prevent_repeat"    : true,
-		"on_keydown"        : function(){game.makeBlock();}
+		"on_keydown"        : function(){game.makeBlock(0);}
 	});
 
 	keyListener.register_combo({
 		"keys"              : "y",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			$("#block1").animate({
-				"top": "384px",
-				"left": "512px",
-				"height": "15px",
-				"width": "0"
-			},
-				3000, function() {
-				$("#block1").remove();
-			});
-		}
-
-	});
-
-	keyListener.register_combo({
-		"keys"              : "u",
-		"prevent_repeat"    : true,
-		"on_keydown"        : function(){
 			$("#block1").velocity({
 				"top": "384px",
 				"left": "512px",
-				"height": "15px",
+				"height": "30px",
 				"width": "0"
 			},
 				3000, function() {
@@ -200,5 +222,7 @@ $(document).ready(function() {
 		}
 
 	});
+
+	
 
 });
