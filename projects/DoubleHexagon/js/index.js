@@ -6,7 +6,6 @@ $(document).ready(function() {
 	var triangleMaker = function(player) {
 		var self = this;
 		this.degree = 0; // variable that store the current position of the triangle
-		this.isLost = false; // variable to turn to true when the game is lost
 		var animateLeft; // variable to store setInterval so it can be killed later
 		var animateRight; // variable to store setInterval so it can be killed later
 
@@ -20,7 +19,8 @@ $(document).ready(function() {
 			else if (player === 2) {
 				className = "triangle2";
 			}
-			$(".mainContainer").append('<div class="triangles '+ className +'"></div>');
+			$(".gameContainer").append('<div class="triangles '+ className +'"></div>');
+			$(".triangle"+player).css({ WebkitTransform: 'rotate(' + self.degree + 'deg)'});
 		};
 
 
@@ -72,8 +72,8 @@ $(document).ready(function() {
 				rightControl = "right";
 			}
 			else if (player === 2 ) {
-				leftControl = "j";
-				rightControl = "k";
+				leftControl = "d";
+				rightControl = "f";
 			}
 			
 			keyListener.register_combo({
@@ -107,6 +107,11 @@ $(document).ready(function() {
 		this.nowPlayingInterval = null; // Variable that will store the setInterval that create the blocks
 		this.nowPlaying = false; // Variable that determine if the game is currently running
 		this.multiPlayer = false;
+		this.instance = 1;
+
+		this.scoreInterval = null;
+		this.score = 0;
+		this.hiScore = 0;
 
 
 		// Makes new block
@@ -170,12 +175,22 @@ $(document).ready(function() {
 			var startPoint= blockIndex * 60; // use the index of the block to determine the start of the surface that block will cover
 			var endPoint = startPoint + 60; // use the previous variable to determine the end of the surface that block will cover
 
+			// Closure that keep the current value of self.instance for later
+			var rememberInstance = (function(){
+				var instance = self.instance;
+				return function() {
+					return instance;
+				};
+			})();
+
 			setTimeout(function() {
 				var player1Position = player1.degree;
 				var player2Position = player2.degree;
 				var playerLose = 0;
 
-				if (!self.isLost) {
+				if (rememberInstance() === game.instance) {// Check that the timeout function originated in the current game
+
+
 					if (self.multiPlayer) {// Check if in multiplayer mode 
 
 						if (( (player1.degree >= startPoint) && (player1.degree <= endPoint) ) && (player2.degree >= startPoint) && (player2.degree <= endPoint)) {
@@ -199,26 +214,32 @@ $(document).ready(function() {
 					}
 
 					if (playerLose !== 0) {
-						self.isLost = true;
+						game.instance++;
 						self.nowPlaying = false;
 						$(".triangles").remove();
 						$(".block").remove();
 						player1.degree = 0;
 						player2.degree = 0;
 						clearInterval(self.nowPlayingInterval);
+						clearInterval(self.scoreInterval);
+						if (self.score > self.hiScore) {
+							self.hiScore = self.score;
+						}
+						self.score = 0;
 
 						if (playerLose === 3) {
-							alert('You both lose');
+							theUI.displayLoserMenu("Both");
 						}
 						else if (playerLose === 1) {
-							$(".instruction").prepend('<h1 class="status">You lose</h1>');
+							theUI.displayLoserMenu("Player 1");
 						}
 						else if (playerLose === 2) {
-							alert('Player 2 loses');
+							theUI.displayLoserMenu("Player 2");
 						}
 						
 					}
 					
+
 				}
 
 			}, 2350);
@@ -252,13 +273,19 @@ $(document).ready(function() {
 		this.start = function() {
 			// check that the game is not already launched
 			if (!self.nowPlaying) {
-				self.isLost = false; // turn of the lost game switch
 				self.nowPlaying = true; // turn on the game is now playing switch
 
 				// start spawning wall every second until it's stopped
 				self.nowPlayingInterval = setInterval(function(){
 					self.spawnWall();
 				}, 1000);
+
+				if (self.multiPlayer !== true) {
+					self.scoreInterval = setInterval(function(){
+						self.score++;
+						$("#scoreNumber").html(self.score);
+					}, 100);
+				}
 			}
 		};
 
@@ -269,17 +296,95 @@ $(document).ready(function() {
 	
 	// function that build the interface
 	var uiMaker = function() {
+		var self = this;
+		this.selectedButton = "left"; // Default selected button
+		this.buttonSelectorInterval = null;
 
+		this.buttonSelector = function() {
+			self.buttonSelectorInterval = setInterval(function(){
+				if ( (player1.degree <= 90) || (player1.degree >= 270) ) {
+					self.selectedButton = "left";
+					$("#buttonRight").removeClass('selectedButton');
+					$("#buttonLeft").addClass('selectedButton');
+				}
+				else if ( (player1.degree >= 90) || (player1.degree <= 270) ) {
+					self.selectedButton = "right";
+					$("#buttonLeft").removeClass('selectedButton');
+					$("#buttonRight").addClass('selectedButton');
+				}
+			}, 200);
+		};
+
+		this.pickButton = function() {
+			if (self.selectedButton === "left") {
+
+				$(".triangles").remove();
+				player1.createTriangle();
+
+				$("#uiCenterContainer").css("opacity", "0");
+				$("#typeOfScore").html("Score");
+				clearInterval(theUI.buttonSelectorInterval);
+
+				$(".status").remove();
+				game.multiPlayer = false;
+				game.start();
+
+			}
+			else if (self.selectedButton === "right") {
+
+				$(".triangles").remove();
+				player1.createTriangle();
+				player2.createTriangle();
+
+				$("#uiCenterContainer").css("opacity", "0");
+				$("#score").css("opacity", "0");
+				clearInterval(theUI.buttonSelectorInterval);
+
+				$(".status").remove();
+				game.multiPlayer = true;
+				game.start();
+
+			}
+		};
+
+		this.displayMainMenu = function() {
+			$("#uiCenterContainer").css("opacity", "1");
+			$("#typeOfScore").html("Hi-Score");
+			$("#scoreNumber").html(game.hiScore);
+			$("#title").html("Double Hexagon");
+			$("#buttonLeft").html("1-P");
+			$("#buttonRight").html("2-P");
+		};
+
+		this.displayLoserMenu = function(loser) {
+			$("#uiCenterContainer").css("opacity", "1");
+			$("#typeOfScore").html("Hi-Score");
+			$("#scoreNumber").html(game.hiScore);
+			$("#title").html(loser + " loses.");
+			$("#buttonLeft").html("Retry");
+			$("#buttonRight").html("Exit");
+		};
+
+		this.displayCredit = function() {
+			$("#uiCenterContainer").css("opacity", "1");
+			$("#typeOfScore").html("Hi-Score");
+			$("#scoreNumber").html(game.hiScore);
+			$("#title").html("Credit");
+			$("#buttonLeft").html("1-P");
+			$("#buttonRight").html("2-P");
+		};
 	};
 	// end of function that build the interface
 
 
 	// Initialise
 	var game = new gameMaker(); // makes the game
+	var theUI = new uiMaker(); // makes the interface
 	var player1 = new triangleMaker(1); // makes player one
 	var player2 = new triangleMaker(2); // makes player two
 
-
+	player1.createTriangle();
+	theUI.buttonSelector();
 
 
 
@@ -304,7 +409,8 @@ $(document).ready(function() {
 		"keys"              : "s",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			player1.createTriangle();
+			$("#uiCenterContainer").css("opacity", "0");
+			clearInterval(theUI.buttonSelectorInterval);
 			$(".status").remove();
 			game.multiPlayer = false;
 			game.start();
@@ -312,26 +418,43 @@ $(document).ready(function() {
 	});
 
 	keyListener.register_combo({
+		"keys"              : "space",
+		"prevent_repeat"    : true,
+		"on_keydown"        : function(){
+			theUI.pickButton();
+		}
+	});
+
+	keyListener.register_combo({
+		"keys"              : "enter",
+		"prevent_repeat"    : true,
+		"on_keydown"        : function(){
+			theUI.pickButton();
+		}
+	});
+
+	keyListener.register_combo({
 		"keys"              : "q",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			player1.createTriangle();
-			player2.createTriangle();
-			game.multiPlayer = true;
-			game.start();
+			theUI.displayMainMenu();
 		}
 	});
 
 	keyListener.register_combo({
 		"keys"              : "r",
 		"prevent_repeat"    : true,
-		"on_keydown"        : function(){game.animateBlock(0, 33);}
+		"on_keydown"        : function(){
+			theUI.displayLoserMenu("Player 1");
+		}
 	});
 
 	keyListener.register_combo({
 		"keys"              : "t",
 		"prevent_repeat"    : true,
-		"on_keydown"        : function(){game.makeBlock(0);}
+		"on_keydown"        : function(){
+			theUI.displayCreditMenu();
+		}
 	});
 
 	keyListener.register_combo({

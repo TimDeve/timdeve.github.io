@@ -1,6 +1,12 @@
+@font-face {
+    font-family: "visitor1";
+    src: url(../fonts/visitor1.ttf) format("truetype");
+}
+
 body {
   background: black;
-  font-family: sans-serif;
+  color: rgba(255,170,170, 0.9);
+  font-family: "visitor1",sans-serif;
 }
 
 @keyframes hue-rotate {
@@ -20,15 +26,67 @@ body {
 
 .mainContainer {
   position: relative;
+  width: 1024px;
+  height: 768px;
+  margin: 0 auto 0 auto;
+  transform: scale(0.75);
+  border-radius: 50px;
+  overflow: hidden;
+  animation: hue-rotate 10s linear infinite;
+}
+
+.uiContainer {
+  position: absolute;
+  width: 1024px;
+  height: 768px;
+  z-index: 9000;
+}
+
+#score {
+  font-size: 32px;
+  margin: 20px 50px 0 0;
+  text-align: right;
+
+}
+
+#title {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 64px;
+}
+
+#buttonContainer {
+  width: 50%;
+  margin: 14% auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 32px;
+  border: 4px rgba(255,170,170, 0.9) solid;
+  border-radius: 10px;
+}
+
+#buttonLeft {
+  float: left;
+}
+
+#buttonRight {
+  float: right;
+}
+
+.selectedButton {
+  box-shadow: 0px 0px 10px 2px rgba(255,170,170, 0.9), 0px 0px 10px 2px rgba(255,170,170, 0.9) inset;
+}
+
+.gameContainer {
+  position: relative;
   background-color: darkgrey;
   background: url("../img/background.svg");
   width: 1024px;
   height: 768px;
   margin: 0 auto 0 auto;
-  border-radius: 50px;
-  transform: scale(0.75);
-  animation: hue-rotate 10s linear infinite;
-  overflow: hidden;
 }
 
 .centerHexagon {
@@ -58,7 +116,7 @@ body {
 }
 
 .triangle2 {
-  border-right: 10px solid rgba(255,102,102, 0.9);
+  border-left: 10px solid rgba(255,102,102, 0.9);
 }
 
 .blockContainer {

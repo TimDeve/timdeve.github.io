@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Double Hexagon</title>
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/velocity.min.js"></script>
@@ -12,16 +12,26 @@
 </head>
 <body>
   <div class="mainContainer">
-    <div class="centerHexagon"></div>
-  
-    <div class="blockContainer">
+    <div class="uiContainer">
 
+      <div id="score"><span id="typeOfScore">Hi-Score</span>: <span id="scoreNumber">0</span></div>
+
+      <div id="uiCenterContainer">
+        <h1 id="title">Double Hexagon</h1>
+        <div id="buttonContainer">
+          <div class="button" id="buttonLeft">1-P</div>
+          <div class="button" id="buttonRight">2-P</div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="gameContainer">
+      <div class="centerHexagon"></div>
+    
+      <div class="blockContainer">
+
+      </div>
     </div>
   </div>
-  <div class="instruction">
-    <p>You're the small triangle, press “left” to go anti clock wise and “right” to go clock wise.</p>
-    <p>Press “s” to launch the game, for some reason the first wave is invisible so if you lose without hitting anything that’s why, it works fine after the first wave.</p>
-  </div>
-
 </body>
 </html>
