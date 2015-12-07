@@ -103,6 +103,7 @@ $(document).ready(function() {
 	// Builder function to create game object
 	var gameMaker = function() {
 		var self = this;
+		var numberOfLoser = 0;
 		this.blockCounter = 0; // Counter so there is no conflict between block ID
 		this.nowPlayingInterval = null; // Variable that will store the setInterval that create the blocks
 		this.nowPlaying = false; // Variable that determine if the game is currently running
@@ -169,6 +170,47 @@ $(document).ready(function() {
 		};
 
 
+
+		this.isLost = function(playerLose) {
+
+			game.instance++;
+			self.nowPlaying = false;
+			$(".triangles").remove();
+			$(".block").remove();
+			player1.degree = 0;
+			player2.degree = 0;
+			clearInterval(self.nowPlayingInterval);
+			clearInterval(self.scoreInterval);
+
+			createjs.Sound.stop("backgroundMusic");
+			createjs.Sound.play("gameOver");
+
+			if (self.score > self.hiScore) {
+				self.hiScore = self.score;
+			}
+			self.score = 0;
+
+
+			if (self.multiPlayer) {
+				
+				if (playerLose === 3) {
+					theUI.displayLoserMenu("Both");
+				}
+				else if (playerLose === 1) {
+
+					theUI.displayLoserMenu("Player 1");
+				}
+				else if (playerLose === 2) {
+					theUI.displayLoserMenu("Player 2");
+				}
+			}
+
+			else {
+				theUI.displayLoserMenu("Player 1");
+			}
+		};
+
+
 		// Function that wait a certain amount of time before checking if the triangle is in the same zone as a block, takes one argument:
 		// **blockIndex: the position of the block to check for colision, takes a number from 0 to 5
 		this.checkCollision = function(blockIndex) {
@@ -199,10 +241,12 @@ $(document).ready(function() {
 
 						else if ((player1.degree >= startPoint) && (player1.degree <= endPoint)) {
 							playerLose = 1;// set playerLose to 1 if player 1 loses
+							numberOfLoser++;
 						}
 
 						else if ((player2.degree >= startPoint) && (player2.degree <= endPoint)) {
 							playerLose = 2;// set playerLose to 2 if player 1 loses
+							numberOfLoser++;
 						}
 
 					}
@@ -213,37 +257,22 @@ $(document).ready(function() {
 						}
 					}
 
+					// Wait for 10 millisecond to check if there is two loosers on different block.
 					if (playerLose !== 0) {
-						game.instance++;
-						self.nowPlaying = false;
-						$(".triangles").remove();
-						$(".block").remove();
-						player1.degree = 0;
-						player2.degree = 0;
-						clearInterval(self.nowPlayingInterval);
-						clearInterval(self.scoreInterval);
-						
-						if (self.score > self.hiScore) {
-							self.hiScore = self.score;
-						}
-						self.score = 0;
+						setTimeout(function() {
+							if (numberOfLoser === 2) {
+								self.isLost(3);
+							}
+							else {
+								self.isLost(playerLose);
+							}
 
-						if (playerLose === 3) {
-							theUI.displayLoserMenu("Both");
-						}
-						else if (playerLose === 1) {
-							theUI.displayLoserMenu("Player 1");
-						}
-						else if (playerLose === 2) {
-							theUI.displayLoserMenu("Player 2");
-						}
+						}, 10);
 						
 					}
-					
-
 				}
 
-			}, 2350);
+			}, 2300);
 		};
 
 
@@ -266,6 +295,7 @@ $(document).ready(function() {
 					self.checkCollision(i); // check a bit later to see if it it's anything
 					
 				}
+
 			}
 		};
 
@@ -275,6 +305,7 @@ $(document).ready(function() {
 			// check that the game is not already launched
 			if (!self.nowPlaying) {
 				self.nowPlaying = true; // turn on the game is now playing switch
+				numberOfLoser = 0;
 
 				// start spawning wall every second until it's stopped
 				self.nowPlayingInterval = setInterval(function(){
@@ -287,6 +318,8 @@ $(document).ready(function() {
 						$("#scoreNumber").html(self.score);
 					}, 100);
 				}
+
+				createjs.Sound.play("backgroundMusic", {loop:-1});
 			}
 		};
 
@@ -300,6 +333,8 @@ $(document).ready(function() {
 		var self = this;
 		this.selectedButton = "left"; // Default selected button
 		this.buttonSelectorInterval = null;
+		this.currentScreen = null;
+
 
 		this.buttonSelector = function() {
 			self.buttonSelectorInterval = setInterval(function(){
@@ -316,40 +351,44 @@ $(document).ready(function() {
 			}, 200);
 		};
 
+
 		this.pickButton = function() {
-			if (self.selectedButton === "left") {
 
-				$(".triangles").remove();
-				player1.createTriangle();
+			if (self.currentScreen === "main") {
 
-				$("#uiCenterContainer").css("opacity", "0");
-				$("#typeOfScore").html("Score");
-				clearInterval(theUI.buttonSelectorInterval);
-
-				$(".status").remove();
-				game.multiPlayer = false;
-				game.start();
+				if (self.selectedButton === "left") {
+					self.startXPmode(1);
+				}
+				else if (self.selectedButton === "right") {
+					self.startXPmode(2);
+				}
 
 			}
-			else if (self.selectedButton === "right") {
 
-				$(".triangles").remove();
-				player1.createTriangle();
-				player2.createTriangle();
+			else if (self.currentScreen === "loser") {
 
-				$("#uiCenterContainer").css("opacity", "0");
-				$("#score").css("opacity", "0");
-				clearInterval(theUI.buttonSelectorInterval);
+				if (self.selectedButton === "left") {
+					self.startXPmode("retry");
+				}
+				else if (self.selectedButton === "right") {
+					self.displayMainMenu();
+				}
 
-				$(".status").remove();
-				game.multiPlayer = true;
-				game.start();
+			}
+
+			else if (self.currentScreen === "credit") {
+
+
 
 			}
 		};
 
+
+
 		this.displayMainMenu = function() {
+			self.currentScreen = "main";
 			$("#uiCenterContainer").css("opacity", "1");
+			$("#score").css("opacity", "1");
 			$("#typeOfScore").html("Hi-Score");
 			$("#scoreNumber").html(game.hiScore);
 			$("#title").html("Double Hexagon");
@@ -357,7 +396,11 @@ $(document).ready(function() {
 			$("#buttonRight").html("2-P");
 		};
 
+
 		this.displayLoserMenu = function(loser) {
+			self.currentScreen = "loser";
+			player1.createTriangle();
+			self.buttonSelector();
 			$("#uiCenterContainer").css("opacity", "1");
 			$("#typeOfScore").html("Hi-Score");
 			$("#scoreNumber").html(game.hiScore);
@@ -366,7 +409,9 @@ $(document).ready(function() {
 			$("#buttonRight").html("Exit");
 		};
 
+
 		this.displayCredit = function() {
+			self.currentScreen = "credit";
 			$("#uiCenterContainer").css("opacity", "1");
 			$("#typeOfScore").html("Hi-Score");
 			$("#scoreNumber").html(game.hiScore);
@@ -374,6 +419,43 @@ $(document).ready(function() {
 			$("#buttonLeft").html("1-P");
 			$("#buttonRight").html("2-P");
 		};
+
+
+
+		this.startXPmode = function(modeOrRetry) {
+			var mode = modeOrRetry;
+			$(".triangles").remove();
+			$(".status").remove();
+			clearInterval(theUI.buttonSelectorInterval);
+			player1.createTriangle();
+
+			if (mode === "retry") {
+				if (game.multiPlayer) {
+					mode = 2;
+				}
+				else if (!game.multiPlayer) {
+					mode = 1;
+				}
+			}
+			
+			if (mode === 2) {
+				player2.createTriangle();
+				$("#uiCenterContainer").css("opacity", "0");
+				$("#score").css("opacity", "0");
+				game.multiPlayer = true;
+			}
+			else if (mode === 1) {
+				$("#uiCenterContainer").css("opacity", "0");
+				$("#typeOfScore").html("Score");
+				game.multiPlayer = false;
+			}
+
+			game.start();
+
+		};
+
+		createjs.Sound.registerSound("../sounds/POL-rocketman-short.ogg", "backgroundMusic");
+		createjs.Sound.registerSound("../sounds/GameOver.ogg", "gameOver");
 	};
 	// end of function that build the interface
 
@@ -385,6 +467,7 @@ $(document).ready(function() {
 	var player2 = new triangleMaker(2); // makes player two
 
 	player1.createTriangle();
+	theUI.displayMainMenu();
 	theUI.buttonSelector();
 
 
@@ -435,45 +518,30 @@ $(document).ready(function() {
 	});
 
 	keyListener.register_combo({
-		"keys"              : "q",
+		"keys"              : "e",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			theUI.displayMainMenu();
+			createjs.Sound.registerSound("../sounds/POL-rocketman-short.ogg", "backgroundMusic");
 		}
 	});
+
+
 
 	keyListener.register_combo({
 		"keys"              : "r",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			theUI.displayLoserMenu("Player 1");
+			console.log('test');
+			createjs.Sound.play("backgroundMusic", {loop:-1});
 		}
 	});
+
 
 	keyListener.register_combo({
 		"keys"              : "t",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			theUI.displayCreditMenu();
-		}
-	});
-
-	keyListener.register_combo({
-		"keys"              : "y",
-		"prevent_repeat"    : true,
-		"on_keydown"        : function(){
-			var wallArray = [1,1,1,1,1,1];
-
-			for (i = 0; i < wallArray.length; i++) {
-
-				if (wallArray[i] === 1) {
-					game.blockCounter++;
-					var thisBlock = game.blockCounter;
-
-					game.makeBlock(i, thisBlock);
-					
-				}
-			}
+			createjs.Sound.stop("backgroudMusic");
 		}
 
 	});
