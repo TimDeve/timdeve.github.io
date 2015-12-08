@@ -9,7 +9,10 @@
   <script type="text/javascript" src="js/keypress-2.1.3.min.js"></script>
   <script type="text/javascript" src="https://code.createjs.com/soundjs-0.6.1.min.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
-  
+   <!--
+    Music by playonloop.com
+    Sound effect by Jojikiba 
+  -->
 </head>
 <body>
   <div class="mainContainer">
@@ -23,6 +26,7 @@
           <div class="button" id="buttonLeft">1-P</div>
           <div class="button" id="buttonRight">2-P</div>
         </div>
+        <div class="button" id="buttonBottom">2-P</div>
       </div>
       
     </div>
@@ -34,6 +38,7 @@
       </div>
     </div>
   </div>
-  <img src="img/blockOrigin.svg" id="svgLoader">
+  <!-- This preload the svg so it's ready when the game start, it is always hidden -->
+  <img src="img/blockOrigin.svg" id="svgLoader" style="display: none">
 </body>
 </html>

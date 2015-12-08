@@ -336,6 +336,7 @@ $(document).ready(function() {
 		this.currentScreen = null;
 
 
+		// function that check the current position of the triangle to determine which button it is currently selecting
 		this.buttonSelector = function() {
 			self.buttonSelectorInterval = setInterval(function(){
 				if ( (player1.degree <= 90) || (player1.degree >= 270) ) {
@@ -352,6 +353,8 @@ $(document).ready(function() {
 		};
 
 
+
+		// Function  to launch the right mode depending on the context
 		this.pickButton = function() {
 
 			if (self.currentScreen === "main") {
@@ -378,13 +381,22 @@ $(document).ready(function() {
 
 			else if (self.currentScreen === "credit") {
 
+				// To create
 
+			}
+
+			else if (self.currentScreen === "share") {
+
+				player1.createTriangle(); // Create the triangle for selection
+				theUI.displayMainMenu(); // Display the main menu
+				theUI.buttonSelector(); // Launch the setInterval that check the current button choice
 
 			}
 		};
 
 
 
+		// Build the main menu when called
 		this.displayMainMenu = function() {
 			self.currentScreen = "main";
 			$("#uiCenterContainer").css("opacity", "1");
@@ -394,9 +406,11 @@ $(document).ready(function() {
 			$("#title").html("Double Hexagon");
 			$("#buttonLeft").html("1-P");
 			$("#buttonRight").html("2-P");
+			$("#buttonBottom").hide();
 		};
 
 
+		// Build the loser menu when called
 		this.displayLoserMenu = function(loser) {
 			self.currentScreen = "loser";
 			player1.createTriangle();
@@ -404,24 +418,33 @@ $(document).ready(function() {
 			$("#uiCenterContainer").css("opacity", "1");
 			$("#typeOfScore").html("Hi-Score");
 			$("#scoreNumber").html(game.hiScore);
-			$("#title").html(loser + " loses.");
+			$("#title").html(loser + " loses");
 			$("#buttonLeft").html("Retry");
 			$("#buttonRight").html("Exit");
 		};
 
 
-		this.displayCredit = function() {
-			self.currentScreen = "credit";
+		// Build the share menu when called
+		this.displayShareMenu = function(name, score) {
+			var convertedName = atob(decodeURIComponent(name));
+			var convertedScore = atob(decodeURIComponent(score));
+			self.currentScreen = "share";
 			$("#uiCenterContainer").css("opacity", "1");
-			$("#typeOfScore").html("Hi-Score");
-			$("#scoreNumber").html(game.hiScore);
-			$("#title").html("Credit");
-			$("#buttonLeft").html("1-P");
-			$("#buttonRight").html("2-P");
+			$("#title").html("My High Score!");
+			$("#buttonLeft").html(convertedName);
+			$("#buttonRight").html(convertedScore);
+			$("#buttonBottom").html("Think you can you do better?");
 		};
 
 
+		// Build the main menu when called
+		this.displayCredit = function() {
+			// to build
+		};
 
+
+		// function that lauch the game when a button is chosen, accepts one argument:
+		// **modeOrRetry: takes either 1 for 1 player mode, 2 for 2 player mode, or "retry" to lauch the last mode used
 		this.startXPmode = function(modeOrRetry) {
 			var mode = modeOrRetry;
 			$(".triangles").remove();
@@ -454,6 +477,38 @@ $(document).ready(function() {
 
 		};
 
+
+
+		this.getUrlData = function(request) {
+			var GET = {};
+			var query = window.location.search.substring(1).split("&");
+			for (var i = 0, max = query.length; i < max; i++)
+			{
+			    if (query[i] === "") // check for trailing & with no param
+			        continue;
+
+			    var param = query[i].split("=");
+			    GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
+			}
+			return GET[request];
+		};
+
+
+
+		this.checkIfShared = function() {
+			if (self.getUrlData("name") !== undefined) {
+				var thisName = self.getUrlData("name");
+				var thisScore = self.getUrlData("score");
+				self.displayShareMenu(thisName, thisScore);
+			}
+			else {
+				player1.createTriangle(); // Create the triangle for selection
+				theUI.displayMainMenu(); // Display the main menu
+				theUI.buttonSelector(); // Launch the setInterval that check the current button choice
+			}
+		};
+
+		// Preload sounds
 		createjs.Sound.registerSound("sounds/POL-rocketman-short.ogg", "backgroundMusic");
 		createjs.Sound.registerSound("sounds/GameOver.ogg", "gameOver");
 	};
@@ -466,13 +521,13 @@ $(document).ready(function() {
 	var player1 = new triangleMaker(1); // makes player one
 	var player2 = new triangleMaker(2); // makes player two
 
-	player1.createTriangle();
-	theUI.displayMainMenu();
-	theUI.buttonSelector();
+	theUI.checkIfShared();
 
 
 
 	// testing
+	
+
 	var testWall = function(){
 			var wallArray = [1,1,1,1,1,1];
 
@@ -493,11 +548,7 @@ $(document).ready(function() {
 		"keys"              : "s",
 		"prevent_repeat"    : true,
 		"on_keydown"        : function(){
-			$("#uiCenterContainer").css("opacity", "0");
-			clearInterval(theUI.buttonSelectorInterval);
-			$(".status").remove();
-			game.multiPlayer = false;
-			game.start();
+				theUI.checkIfShared();
 		}
 	});
 
