@@ -1,2 +1,5 @@
 # DoubleHexagon
-A (Super) Hexagon clone.
+###### A (Super) Hexagon clone.
+
+## Introduction
+
