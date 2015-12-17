@@ -1,0 +1,12 @@
+body {
+  background-color: red;
+  background: url("../img/1.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin:calc(100vw/20);
+}
+
+.mainContainer {
+  background-color: #fff7ee;
+  width: 100%;
+  height: calc(100vh - (100vw/10));
+}
