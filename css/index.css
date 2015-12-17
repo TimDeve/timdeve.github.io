@@ -1,4 +1,18 @@
+@font-face {
+    font-family: 'butlerextrabold';
+    src: url('../fonts/butler_extrabold.eot');
+    src: url('../fonts/butler_extrabold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/butler_extrabold.woff2') format('woff2'),
+         url('../fonts/butler_extrabold.woff') format('woff'),
+         url('../fonts/butler_extrabold.ttf') format('truetype'),
+         url('../fonts/butler_extrabold.svg#butlerextrabold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
+  font-family: 'Roboto Mono', monospace;
   background-color: red;
   background: url("../img/1.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -6,7 +20,21 @@ body {
 }
 
 .mainContainer {
+  position: absolute;
   background-color: #fff7ee;
   width: 100%;
   height: calc(100vh - (100vw/10));
+}
+
+.message {
+  padding-top: 20vh;
+  padding-left: 5vw;
+  font-family: 'butlerextrabold', serif;
+  font-size: 36px;
+  max-width: 50%;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
 }
