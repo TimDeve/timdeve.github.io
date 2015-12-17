@@ -13,14 +13,15 @@
 
 body {
   font-family: 'Roboto Mono', monospace;
-  background-color: red;
+  background-color: #fff7ee;
+  color: #2c3e50;
   background: url("../img/1.jpg") no-repeat center center fixed;
   background-size: cover;
   margin:calc(100vw/20);
 }
 
 .mainContainer {
-  position: absolute;
+  position: relative;
   background-color: #fff7ee;
   width: 100%;
   height: calc(100vh - (100vw/10));
@@ -35,6 +36,34 @@ body {
 }
 
 .footer {
-  position: relative;
+  position: absolute;
+  font-size: 18px;
+  width: 90%;
   bottom: 0;
+  padding: 5%;
+}
+
+.name {
+  display: inline-block;
+  float: left;
+}
+
+.contact {
+  display: inline-block;
+  float: right;
+}
+
+.contact ul {
+  display: inline-block;
+  margin: 0;
+}
+
+.contact li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.contact a {
+  color: #2c3e50;
+  text-decoration: none;
 }
