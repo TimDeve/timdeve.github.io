@@ -46,6 +46,7 @@ body {
 .name {
   display: inline-block;
   float: left;
+  color: #5b708c;
 }
 
 .contact {
@@ -66,4 +67,46 @@ body {
 .contact a {
   color: #2c3e50;
   text-decoration: none;
+}
+
+@media screen and (max-width: 700px) {
+
+  .message {
+    max-width: 80%;
+  }
+
+  .name {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .contact {
+    display: block;
+    float: left;
+  }
+
+  .contact ul {
+    padding: 0;
+  }
+
+  .contact li {
+    margin-top: 20px;
+    margin-left: 0;
+  }
+  
+}
+
+@media screen and (max-width: 450px) {
+
+  .message {
+    width: 100%;
+    padding-top: 20px;
+    font-size: 32px;
+  }
+  
+  .footer {
+    padding-bottom: 40px;
+  }
 }
