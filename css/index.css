@@ -46,7 +46,6 @@ body {
 .name {
   display: inline-block;
   float: left;
-  color: #5b708c;
 }
 
 .contact {
@@ -64,9 +63,27 @@ body {
   margin-left: 20px;
 }
 
-.contact a {
-  color: #2c3e50;
+  .contact a {
+    color: #2c3e50;
   text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.contact a .link-underline {
+  display: inline-block;
+  width: 0px;
+  height: 2px;
+  background: #2c3e50;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: 0.15s ease-out;
+}
+
+.contact a:hover .link-underline {
+  width: 100%;
 }
 
 @media screen and (max-width: 700px) {
@@ -95,7 +112,7 @@ body {
     margin-top: 20px;
     margin-left: 0;
   }
-  
+
 }
 
 @media screen and (max-width: 450px) {
@@ -105,7 +122,7 @@ body {
     padding-top: 20px;
     font-size: 32px;
   }
-  
+
   .footer {
     padding-bottom: 40px;
   }
