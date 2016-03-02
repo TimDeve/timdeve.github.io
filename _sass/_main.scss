@@ -23,13 +23,17 @@ body {
 .mainContainer {
   position: relative;
   background-color: #fff7ee;
-  width: 100%;
-  min-height: 90vh;
+  width: 90%;
+  min-height: 80vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .message {
   padding-top: 20vh;
-  padding-left: 5vw;
+  // padding-left: 5vw;
   font-family: 'butlerextrabold', serif;
   font-size: 36px;
   max-width: 50%;
@@ -40,7 +44,7 @@ body {
   font-size: 18px;
   width: 90%;
   bottom: 0;
-  padding: 5%;
+  padding-bottom: 5vh;
 }
 
 .name {
@@ -53,37 +57,56 @@ body {
   float: right;
 }
 
-.contact ul {
-  display: inline-block;
-  margin: 0;
-}
+.site-nav {
 
-.contact li {
-  display: inline-block;
-  margin-left: 20px;
-}
-
-  .contact a {
+  a {
     color: #2c3e50;
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 2px;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+    font-size: 18px;
+
+    .link-underline {
+      display: inline-block;
+      width: 0px;
+      height: 2px;
+      background: #2c3e50;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: 0.15s ease-out;
+    }
+
+    .link-underline_active {
+      @extend .link-underline;
+      width: 100%;
+    }
+
+    &:hover .link-underline {
+      width: 100%;
+    }
+  }
+
+  ul {
+    display: inline-block;
+    margin: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 40px;
+  }
+
 }
 
-.contact a .link-underline {
-  display: inline-block;
-  width: 0px;
-  height: 2px;
-  background: #2c3e50;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transition: 0.15s ease-out;
-}
+.contact {
+  @extend .site-nav;
 
-.contact a:hover .link-underline {
-  width: 100%;
+  li {
+    margin-left: 40px;
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 700px) {

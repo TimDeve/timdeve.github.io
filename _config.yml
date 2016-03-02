@@ -18,3 +18,14 @@ github_username:  timdeve
 
 # Build settings
 markdown: kramdown
+
+# Navigation
+navigation:
+  - text: Home
+    url: /
+  - text: Blog
+    url: /blog/
+  - text: Projects
+    url: /projects/
+  - text: About Me
+    url: /aboutme/

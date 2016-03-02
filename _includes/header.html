@@ -2,9 +2,17 @@
 
     <nav class="site-nav">
       <ul>
-        <li>One</li>
-        <li>Two</li>
-        <li>Three</li>
+
+        {% assign url = page.url|remove:'index.html' %}
+        {% for link in site.navigation %}
+        <li>
+          <a href="{{link.url}}">
+            <div {% if url == link.url %} class="link-underline_active" {%else%} class="link-underline" {% endif %}></div>
+            <span>{{link.text}}</span>
+          </a>
+        </li>
+        {% endfor %}
+
       </ul>
     </nav>
 
