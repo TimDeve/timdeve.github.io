@@ -17,14 +17,14 @@ body {
   color: #2c3e50;
   background: url("../img/1.jpg") no-repeat center center fixed;
   background-size: cover;
-  margin:calc(100vw/20);
+  margin: 5vh;
 }
 
 .mainContainer {
   position: relative;
   background-color: #fff7ee;
   width: 100%;
-  height: calc(100vh - (100vw/10));
+  min-height: 90vh;
 }
 
 .message {
