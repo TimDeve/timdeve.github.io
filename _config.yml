@@ -24,8 +24,8 @@ navigation:
   - text: Home
     url: /
   - text: Blog
-    url: /blog/
+    url: /blog
   - text: Projects
-    url: /projects/
+    url: /projects
   - text: About Me
-    url: /aboutme/
+    url: /aboutme
