@@ -31,12 +31,17 @@ body {
   padding-right: 5%;
 }
 
+main {
+  max-width: 75%;
+  margin: 10% auto;
+}
+
 .message {
-  padding-top: 20vh;
+  padding-top: 10vh;
   // padding-left: 5vw;
   font-family: 'butlerextrabold', serif;
   font-size: 36px;
-  max-width: 50%;
+  max-width: 60%;
 }
 
 .footer {
@@ -57,7 +62,41 @@ body {
   float: right;
 }
 
+.projectContainer {
+  margin-bottom: 100px;
+  margin-top: 50px;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+
+  h3 {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+
+  p {
+    // width: 75%;
+  }
+
+  img {
+    width: 400px;
+    border: 1px solid #2c3e50;
+    margin-bottom: 10px;
+  }
+
+  &:nth-child(odd) img {
+    float: left;
+    margin-right: 30px;
+  }
+  &:nth-child(even) img {
+    float: right;
+    margin-left: 30px;
+  }
+}
+
 .site-nav {
+
+  margin-bottom: 50px;
 
   a {
     color: #2c3e50;
@@ -107,6 +146,26 @@ body {
     margin-left: 40px;
     margin-right: 0;
   }
+}
+
+@media screen and (max-width: 800px) {
+
+  .projectContainer {
+
+    &:nth-child(odd) img {
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+    &:nth-child(even) img {
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+  }
+
 }
 
 @media screen and (max-width: 700px) {
