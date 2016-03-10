@@ -29,6 +29,7 @@ body {
   padding-bottom: 5vh;
   padding-left: 5%;
   padding-right: 5%;
+  box-sizing: content-box;
 }
 
 main {
@@ -62,16 +63,25 @@ main {
   float: right;
 }
 
+.projectsContainer {
+  @include outer-container;
+}
+
 .projectContainer {
-  margin-bottom: 100px;
-  margin-top: 50px;
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  @include span-columns(6);
+  @include omega(2n);
+
+  box-sizing: border-box;
+  padding: 20px;
 
   h3 {
     font-size: 24px;
     margin-top: 10px;
+    display: inline-block;
+  }
+
+  .projectLinks {
+    display: inline-block;
   }
 
   p {
@@ -79,19 +89,10 @@ main {
   }
 
   img {
-    width: 400px;
     border: 1px solid #2c3e50;
     margin-bottom: 10px;
   }
 
-  &:nth-child(odd) img {
-    float: left;
-    margin-right: 30px;
-  }
-  &:nth-child(even) img {
-    float: right;
-    margin-left: 30px;
-  }
 }
 
 .site-nav {

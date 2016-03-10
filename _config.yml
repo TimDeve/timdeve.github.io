@@ -23,8 +23,8 @@ markdown: kramdown
 navigation:
   - text: Home
     url: /
-  - text: Blog
-    url: /blog
+  # - text: Blog
+  #   url: /blog
   - text: Projects
     url: /projects
   - text: About Me

@@ -5,50 +5,21 @@ permalink: /projects
 ---
 <div class="projectsContainer">
 
+  {% for project in site.data.projects %}
+
   <div class="projectContainer">
-    <img src="/img/projects/codealong.png" alt="">
+    <img src="{{ project.img }}" alt="">
     <div>
-      <h3>codeAlong</h3>
-      <p><a href="github">Github</a> | <a href="hosted">Demo</a></p>
-      <p>codeAlong is a community to share snippet of code, people can comment on each other snippet, star their favourite and even recode a snippet to put their own twist on it. The goal of the project was to create a full stack Rails app. My reason for building this app was that I wanted to create a piece of software that would not only be interesting in the quality of it’s code but also in its potential usefulness for me and my classmate. The main things I learned from that project was how to organise a growing codebase and complex database relationship.</p>
+      <h3>{{ project.title }}</h3>
+      <p class="projectLinks">| <a href="{{ project.github }}">Github</a> | <a href="{{ project.demo }}">Demo</a></p>
+
+      {% for para in project.body %}
+      <p>{{ para }}</p>
+      {% endfor %}
+
     </div>
   </div>
 
-  <div class="projectContainer">
-    <img src="/img/projects/codealong.png" alt="">
-    <div>
-      <h3>codeAlong</h3>
-      <p><a href="github">Github</a> | <a href="hosted">Demo</a></p>
-      <p>codeAlong is a community to share snippet of code, people can comment on each other snippet, star their favourite and even recode a snippet to put their own twist on it. The goal of the project was to create a full stack Rails app. My reason for building this app was that I wanted to create a piece of software that would not only be interesting in the quality of it’s code but also in its potential usefulness for me and my classmate. The main things I learned from that project was how to organise a growing codebase and complex database relationship.</p>
-    </div>
-  </div>
-
-  <div class="projectContainer">
-    <img src="/img/projects/codealong.png" alt="">
-    <div>
-      <h3>codeAlong</h3>
-      <p><a href="github">Github</a> | <a href="hosted">Demo</a></p>
-      <p>codeAlong is a community to share snippet of code, people can comment on each other snippet, star their favourite and even recode a snippet to put their own twist on it. The goal of the project was to create a full stack Rails app. My reason for building this app was that I wanted to create a piece of software that would not only be interesting in the quality of it’s code but also in its potential usefulness for me and my classmate. The main things I learned from that project was how to organise a growing codebase and complex database relationship.</p>
-    </div>
-  </div>
-
-  <div class="projectContainer">
-    <img src="/img/projects/codealong.png" alt="">
-    <div>
-      <h3>codeAlong</h3>
-      <p><a href="github">Github</a> | <a href="hosted">Demo</a></p>
-      <p>codeAlong is a community to share snippet of code, people can comment on each other snippet, star their favourite and even recode a snippet to put their own twist on it. The goal of the project was to create a full stack Rails app. My reason for building this app was that I wanted to create a piece of software that would not only be interesting in the quality of it’s code but also in its potential usefulness for me and my classmate. The main things I learned from that project was how to organise a growing codebase and complex database relationship.</p>
-    </div>
-  </div>
-
-  <div class="projectContainer">
-    <img src="/img/projects/codealong.png" alt="">
-    <div>
-      <h3>codeAlong</h3>
-      <p><a href="github">Github</a> | <a href="hosted">Demo</a></p>
-      <p>codeAlong is a community to share snippet of code, people can comment on each other snippet, star their favourite and even recode a snippet to put their own twist on it. The goal of the project was to create a full stack Rails app. My reason for building this app was that I wanted to create a piece of software that would not only be interesting in the quality of it’s code but also in its potential usefulness for me and my classmate. The main things I learned from that project was how to organise a growing codebase and complex database relationship.</p>
-    </div>
-  </div>
-
+  {% endfor %}
 
 </div>
