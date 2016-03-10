@@ -152,27 +152,22 @@ main {
 @media screen and (max-width: 800px) {
 
   .projectContainer {
-
-    &:nth-child(odd) img {
-      float: none;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-    }
-    &:nth-child(even) img {
-      float: none;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-    }
+    @include span-columns(12);
+    margin-top: 20px;
+    padding: 0;
   }
 
-}
-
-@media screen and (max-width: 700px) {
+  .site-nav {
+    li {
+      margin-bottom: 10px;
+      display: block;
+    }
+    margin-bottom: 10px;
+  }
 
   .message {
     max-width: 80%;
+    margin-bottom: 250px;
   }
 
   .name {
@@ -197,6 +192,7 @@ main {
   }
 
 }
+
 
 @media screen and (max-width: 450px) {
 
