@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Canvas",
+    "img": "/img/projects/canvas.jpg",
+    "github": "https://github.com/TimDeve/canvas",
+    "demo": "http://canvas.do.timdeve.com/",
+    "body": [
+      "Canvas is an online and real-time drawing game. For my last project, I wanted to use technologies that I had not previously had the time to explore, so I build most of my app around WebSockets, a game seemed the most suited to the task as there is a lot of logic and communication between the two client involved. Aside from WebSocket, I used Angular for my frontend and Express/MongoDB on my backend. I also wanted to experiment with tooling, and so I used NPM Script for my compilation and Browserify to organize my frontend JavaScript."
+    ]
+  },
+  {
+    "title": "TrackIt",
+    "img": "/img/projects/trackit.jpg",
+    "github": "https://github.com/TimDeve/trackit",
+    "demo": "http://trackit.do.timdeve.com/",
+    "body": [
+      "TrackIt is a website to track your personal health related data. The goal of the project was to create a full stack Node/MongoDB API consumed by the front-end, as a group. We picked health because we thought that it would create interesting data to visualise. The main teaching of that project would be working as group with people of different skill level."
+    ]
+  },
+  {
+    "title": "codeAlong",
+    "img": "/img/projects/codealong.jpg",
+    "github": "https://github.com/TimDeve/codeAlong",
+    "demo": "http://codealong.do.timdeve.com/",
+    "body": [
+      "codeAlong is a community to share snippet of code, people can comment on each other snippet, star their favourite and even recode a snippet to put their own twist on it. The goal of the project was to create a full stack Rails app. My reason for building this app was that I wanted to create a piece of software that would not only be interesting in the quality of it’s code but also in its potential usefulness for me and my classmate. The main things I learned from that project was how to organise a growing codebase and complex database relationship."
+    ]
+  },
+  {
+    "title": "Double Hexagon",
+    "img": "/img/projects/doublehexagon.jpg",
+    "github": "https://github.com/TimDeve/doublehexagon",
+    "demo": "http://doublehexagon.do.timdeve.com/",
+    "body": [
+      "Double Hexagon is a clone of (Super) Hexagon for two players. The goal of the project was to create a two player game with HTML, CSS and JavaScript.  While most people decided to create a turn by turn game, I wanted to create something more dynamic. In my mind Hexagon imposed itself, with its simple but twitchy gameplay and memorable graphics. I learn a lot during this project about OO programming, animations and good logic."
+    ]
+  }
+]
