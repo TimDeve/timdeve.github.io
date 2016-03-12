@@ -149,12 +149,40 @@ main {
   }
 }
 
+
+.aboutMeContainer {
+  @include outer-container;
+
+  .aboutMeImg {
+    max-width: 300px;
+    @include span-columns(3);
+  }
+
+  .aboutMeTextContainer {
+    padding-top: 10vw;
+    @include span-columns(9);
+  }
+}
+
 @media screen and (max-width: 800px) {
 
   .projectContainer {
     @include span-columns(12);
     margin-top: 20px;
     padding: 0;
+  }
+
+  .aboutMeContainer {
+
+    .aboutMeImg {
+      @include span-columns(12);
+      margin: 0 auto;
+      float: none;
+    }
+
+    .aboutMeTextContainer {
+      @include span-columns(12);
+    }
   }
 
   .site-nav {
@@ -190,6 +218,7 @@ main {
     margin-top: 20px;
     margin-left: 0;
   }
+  
 
 }
 
