@@ -18,15 +18,6 @@
     ]
   },
   {
-    "title": "TrackIt",
-    "img": "/img/projects/trackit.jpg",
-    "github": "https://github.com/TimDeve/trackit",
-    "demo": "http://trackit.do.timdeve.com/",
-    "body": [
-      "TrackIt is a website to track your personal health related data. The goal of the project was to create a full stack Node/MongoDB API consumed by the front-end, as a group. We picked health because we thought that it would create interesting data to visualise. The main teaching of that project would be working as group with people of different skill level."
-    ]
-  },
-  {
     "title": "codeAlong",
     "img": "/img/projects/codealong.jpg",
     "github": "https://github.com/TimDeve/codeAlong",
