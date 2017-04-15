@@ -1,246 +1,67 @@
-@font-face {
-    font-family: 'butlerextrabold';
-    src: url('../fonts/butler_extrabold.eot');
-    src: url('../fonts/butler_extrabold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/butler_extrabold.woff2') format('woff2'),
-         url('../fonts/butler_extrabold.woff') format('woff'),
-         url('../fonts/butler_extrabold.ttf') format('truetype'),
-         url('../fonts/butler_extrabold.svg#butlerextrabold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
+$fg-color: #2c3e50;
+$bg-color: #faf7f4;
 
 body {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  background: url("../img/1.jpg") no-repeat center center fixed #050908;
-  background-size: cover;
-  margin: 5vh;
+  color: $fg-color;
+  background-color: $bg-color;
+  font-family: "Roboto Mono", monospace;
+  margin: 0;
+  padding: 0;
 }
 
 .mainContainer {
-  position: relative;
-  background-color: #fff7ee;
-  width: 90%;
-  min-height: 80vh;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  padding-left: 5%;
-  padding-right: 5%;
-  box-sizing: content-box;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-main {
-  max-width: 75%;
-  margin: 10% auto;
-}
-
-.message {
-  padding-top: 15vh;
-  // padding-left: 5vw;
-  font-family: 'butlerextrabold', serif;
-  font-size: 36px;
-  max-width: 60%;
-}
-
-.footer {
-  position: absolute;
-  font-size: 18px;
-  width: 90%;
-  bottom: 0;
-  padding-bottom: 5vh;
-  font-family: "Roboto Mono", monospace;
-}
-
-.name {
-  display: inline-block;
-  float: left;
-}
-
-.contact {
-  display: inline-block;
-  float: right;
-}
-
-.projectsContainer {
-  @include outer-container;
-}
-
-.projectContainer {
-  @include span-columns(6);
-  @include omega(2n);
-
+.centerBlock {
+  padding-left: 40px;
+  padding-right: 40px;
+  line-height: 28px;
   box-sizing: border-box;
-  padding: 20px;
-
-  h3 {
-    font-size: 24px;
-    margin-top: 10px;
-    font-family: "Roboto Mono", monospace;
-    display: inline-block;
-  }
-
-  .projectLinks {
-    margin-left: 20px;
-    font-family: "Roboto Mono", monospace;
-    display: inline-block;
-  }
+  max-width: 580px;
 
   p {
-    // width: 75%;
-  }
-
-  img {
-    border: 1px solid #2c3e50;
-    margin-bottom: 10px;
+    text-align: center;
+    max-width: 380px;
+    margin-top: 0;
+    margin-bottom: 14px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 }
 
-.site-nav {
 
-  font-family: "Roboto Mono", monospace;
-  margin-bottom: 50px;
+.links {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
   a {
+    color: $fg-color;
     color: #2c3e50;
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 2px;
-    font-size: 18px;
-
-    .link-underline {
-      display: inline-block;
-      width: 0px;
-      height: 2px;
-      background: #2c3e50;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      transition: 0.15s ease-out;
-    }
-
-    .link-underline_active {
-      @extend .link-underline;
-      width: 100%;
-    }
-
-    &:hover .link-underline {
-      width: 100%;
-    }
-  }
-
-  ul {
-    display: inline-block;
-    margin: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin-right: 40px;
-  }
-
-}
-
-.contact {
-  @extend .site-nav;
-
-  li {
-    margin-left: 40px;
-    margin-right: 0;
+    text-decoration-line: none;
+    border-bottom: 1px solid $fg-color;
+    padding-bottom: 3px;
   }
 }
 
-
-.aboutMeContainer {
-  @include outer-container;
-
-  .aboutMeImg {
-    max-width: 300px;
-    @include span-columns(3);
+@media screen and (max-width: 432px) {
+  .centerBlock p {
+    max-width: 280px;
   }
 
-  .aboutMeTextContainer {
-    padding-top: 10vw;
-    @include span-columns(9);
-  }
-}
-
-@media screen and (max-width: 800px) {
-
-  .projectContainer {
-    @include span-columns(12);
-    margin-top: 20px;
-    padding: 0;
-
-    .projectLinks {
-      margin-left: 0;
-      display: block;
-    }
-
-  }
-
-  .aboutMeContainer {
-
-    .aboutMeImg {
-      @include span-columns(12);
-      margin: 0 auto;
-      float: none;
-    }
-
-    .aboutMeTextContainer {
-      @include span-columns(12);
-    }
-  }
-
-  .site-nav {
-    li {
-      margin-bottom: 10px;
-      display: block;
-    }
-    margin-bottom: 10px;
-  }
-
-  .message {
-    max-width: 80%;
-    margin-bottom: 250px;
-  }
-
-  .name {
+  .links li {
     display: block;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-
-  .contact {
-    display: block;
-    float: left;
-  }
-
-  .contact ul {
-    padding: 0;
-  }
-
-  .contact li {
-    margin-top: 20px;
-    margin-left: 0;
-  }
-
-}
-
-
-@media screen and (max-width: 450px) {
-
-  .message {
-    width: 100%;
-    padding-top: 20px;
-    font-size: 32px;
-  }
-
-  .footer {
-    padding-bottom: 40px;
+    margin-bottom: 16px;
   }
 }
