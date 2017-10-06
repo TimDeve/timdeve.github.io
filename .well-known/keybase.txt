@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/timdeve
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.timdeve.com
+  * I am timdeve (https://keybase.io/timdeve) on keybase.
+  * I have a public key ASAhJ1pRJRkn4rfP90vGaDMJ-5eHqtapQQPPfgXGIkL2EQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120dfacc6f8c425fc62102df77c1eb76a0ba629ba75d269f81c5016a136d14932030a",
+      "host": "keybase.io",
+      "kid": "012021275a51251927e2b7cff74bc6683309fb9787aad6a94103cf7e05c62242f6110a",
+      "uid": "3f12b34093955c6732a49130d1f10019",
+      "username": "timdeve"
+    },
+    "merkle_root": {
+      "ctime": 1507307694,
+      "hash": "9cc46af8a4bef1efc0010be67ad6b4a8333fb88caa3f815c5183ca1a8109f5731970ab1c6dc0d76a82d35cd958e252dab9734c51ebf681ed26b2d6f7a1c8d7a0",
+      "hash_meta": "f0a85fff378f40aa025fc063a28028546b1c5360f254defa96b9696cc15d91a8",
+      "seqno": 1528117
+    },
+    "service": {
+      "hostname": "www.timdeve.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.33"
+  },
+  "ctime": 1507307709,
+  "expire_in": 504576000,
+  "prev": "b9108b90dc42e2fc7afa1fa8399c16a60eb8a57fe29cece15fdde90121442739",
+  "seqno": 21,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgISdaUSUZJ+K3z/dLxmgzCfuXh6rWqUEDz34FxiJC9hEKp3BheWxvYWTFA0Z7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZGZhY2M2ZjhjNDI1ZmM2MjEwMmRmNzdjMWViNzZhMGJhNjI5YmE3NWQyNjlmODFjNTAxNmExMzZkMTQ5MzIwMzBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwMjEyNzVhNTEyNTE5MjdlMmI3Y2ZmNzRiYzY2ODMzMDlmYjk3ODdhYWQ2YTk0MTAzY2Y3ZTA1YzYyMjQyZjYxMTBhIiwidWlkIjoiM2YxMmIzNDA5Mzk1NWM2NzMyYTQ5MTMwZDFmMTAwMTkiLCJ1c2VybmFtZSI6InRpbWRldmUifSwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE1MDczMDc2OTQsImhhc2giOiI5Y2M0NmFmOGE0YmVmMWVmYzAwMTBiZTY3YWQ2YjRhODMzM2ZiODhjYWEzZjgxNWM1MTgzY2ExYTgxMDlmNTczMTk3MGFiMWM2ZGMwZDc2YTgyZDM1Y2Q5NThlMjUyZGFiOTczNGM1MWViZjY4MWVkMjZiMmQ2ZjdhMWM4ZDdhMCIsImhhc2hfbWV0YSI6ImYwYTg1ZmZmMzc4ZjQwYWEwMjVmYzA2M2EyODAyODU0NmIxYzUzNjBmMjU0ZGVmYTk2Yjk2OTZjYzE1ZDkxYTgiLCJzZXFubyI6MTUyODExN30sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJ3d3cudGltZGV2ZS5jb20iLCJwcm90b2NvbCI6Imh0dHA6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjMzIn0sImN0aW1lIjoxNTA3MzA3NzA5LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwicHJldiI6ImI5MTA4YjkwZGM0MmUyZmM3YWZhMWZhODM5OWMxNmE2MGViOGE1N2ZlMjljZWNlMTVmZGRlOTAxMjE0NDI3MzkiLCJzZXFubyI6MjEsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RAt0D2BY9MVDK6aEKFePsjql448yHTcG7FuM7or6i1wnOFPq7R7BB94EBsL2X2Ung3h0pmNe9Idu4yDoZ9CzNiDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIKTiyNM5I17tI20cPPycamSWSe1JgR9o91fIkKQHta4Ho3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/timdeve
+
+==================================================================
