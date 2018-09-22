@@ -34,7 +34,6 @@ body {
 
 }
 
-
 .links {
   list-style: none;
   padding: 0;
@@ -48,10 +47,18 @@ body {
 
   a {
     color: $fg-color;
-    color: #2c3e50;
-    text-decoration-line: none;
-    border-bottom: 1px solid $fg-color;
+    background-image: linear-gradient(to bottom, $fg-color 0%, $fg-color 100%);
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    background-size: 0.1ex 0.1ex;
+    transition: background-size .2s, color .1s;
+    text-decoration: none;
     padding-bottom: 3px;
+
+    &:hover {
+      background-size: 0.1ex 3ex;
+      color: $bg-color;
+    }
   }
 }
 
